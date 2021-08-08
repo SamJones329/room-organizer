@@ -13,9 +13,9 @@ function App() {
 
       <Navbar>
         <form>
-          <label for="num-rows">Rows: </label>
+          <label htmlFor="num-rows">Rows: </label>
           <input name="num-rows" id="num-rows" type="text"></input>
-          <label for="num-cols">Columns: </label>
+          <label htmlFor="num-cols">Columns: </label>
           <input name="num-cols" id="num-cols" type="text"></input>
           <Button type="submit">
             New Grid

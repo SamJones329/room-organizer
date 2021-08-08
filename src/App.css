@@ -17,8 +17,12 @@ body {
     display: flex;
 }
 
-.grid-square {
+.node {
     width: 20px;
     height: 20px;
     border: 1px solid gray;
+}
+
+.node--filled {
+    background: lightskyblue;
 }
