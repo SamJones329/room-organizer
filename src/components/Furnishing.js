@@ -10,9 +10,9 @@ class Furnishing extends React.Component {
 
     render() {
         return (
-            <Container>
-
-            </Container>
+            <div className="furnishing">
+                
+            </div>
         );
     }
 }

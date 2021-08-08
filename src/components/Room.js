@@ -11,47 +11,58 @@ class Room extends React.Component {
             rows: props.rows,
             columns: props.columns,
             mousePressed: false,
-
+            furnishingUnderConstruction: new Set(),
+            furnishings: [],
+            occupiedNodes: new Set(),
+            colorOptions: ['red', 'blue', 'yellow', 'green', 'orange', 'purple', 'pink'],
         };
     }
 
-    addFurnishing() {
-
+    addFurnishing(furnishingSet) {
+        if(furnishingSet.size === 0) return;
+        const furnishings = this.state.furnishings
+        furnishings.push(furnishingSet);
+        this.setState({ 
+            furnishingUnderConstruction: new Set(),
+            furnishings: furnishings 
+        });
     }
 
     removeFurnishing() {
 
     }
 
-    throwOutFurnishing() {
-
+    addNodeToFurnishingUnderConstruction(index) {
+        const furnishingUnderConstruction = this.state.furnishingUnderConstruction;
+        const occupiedNodes = this.state.occupiedNodes;
+        furnishingUnderConstruction.add(index);
+        occupiedNodes.add(index);
+        this.setState({ 
+            furnishingUnderConstruction: furnishingUnderConstruction,
+            occupiedNodes: occupiedNodes
+        });
     }
 
-    onMouseDown(row, col) {
+    onMouseDown =  (row, col) => {
+        const index = row*this.state.rows + col;
+        if(this.state.occupiedNodes.has(index) || this.state.mousePressed) return;
         this.setState({ mousePressed: true });
+
     }
 
-    onMouseEnter(row, col) {
-        //if mousePressed
-            //create rectangle with opposing corners as first mouse down node and current node
-            //update nodes in that rectangle to be colored
-            //if any node in the to-be-created rectangle is already in another shape, set that node as invalid
+    onMouseEnter = (row, col) => {
+        if(this.state.mousePressed) {
+            const index = row * this.state.rows + col;
+            if(!this.state.occupiedNodes.has(index)) {
+                this.addNodeToFurnishingUnderConstruction(index);
+            }
+        }
         return this.state.mousePressed;
     }
 
-    onMouseUp(row, col) {
-        //save whatever shape was just drawn as a furnishing
-        //if there are any invalid nodes in the shape (AKA nodes already in another shape)
-            //don't save the shape and reset all the nodes of that shape not in another shape
+    onMouseUp = () => {
         this.setState({ mousePressed: false });
-        const arr = [];
-        const invalid = false;
-        if(invalid) this.throwOutFurnishing(arr);
-        this.addFurnishing(arr);
-    }
-
-    onMouseExitGrid() {
-        // this.setState({ mousePressed: false });
+        this.addFurnishing(this.state.furnishingUnderConstruction);
     }
 
     makeColumns = (row, columns) => {
@@ -72,7 +83,8 @@ class Room extends React.Component {
         return colArr;
     }
 
-    makeGrid = (rows, columns) => {
+    makeGrid = () => {
+        const rows = this.state.rows, columns = this.state.columns;
         const rowArr = []
         for(let i = 0; i < rows; i++) {
             const id = `row-${i}`;
@@ -85,10 +97,18 @@ class Room extends React.Component {
         return rowArr;
     }
 
+    makeFurnishings = () => {
+        const furnishings = this.state.furnishings;
+        for(let furnishing of furnishings) {
+            
+        }
+    }
+
     render() {
         return (
-            <Container className="grid" onMouseLeave={() => this.onMouseExitGrid()}>
-                {this.makeGrid(this.state.rows, this.state.columns)}
+            <Container className="grid" onMouseLeave={this.onMouseUp()}>
+                {this.makeGrid()}
+                {this.makeFurnishings()}
             </Container>
         );
     }

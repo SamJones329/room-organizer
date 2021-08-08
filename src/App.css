@@ -26,3 +26,39 @@ body {
 .node--filled {
     background: lightskyblue;
 }
+
+.node--invisible {
+    background: transparent;
+}
+
+.red {
+    background: indianred;
+}
+
+.blue {
+    background: cornflowerblue;
+}
+
+.green {
+    background: mediumseagreen;
+}
+
+.purple {
+    background: purple;
+}
+
+.pink {
+    background: fuchsia;
+}
+
+.yellow {
+    background: peru;
+}
+
+.orange {
+    
+}
+
+.furnishing {
+    display: grid;
+}
