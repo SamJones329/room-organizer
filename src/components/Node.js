@@ -7,7 +7,6 @@ class Node extends React.Component {
         super(props)
         this.state = {
             ...props,
-            filled: false
         }
     }
 
@@ -17,9 +16,9 @@ class Node extends React.Component {
             <Col
                 id={`node-${this.state.row}-${this.state.col}`}
                 className={`node ${filled}`}
-                onMouseDown={() => this.handleMouseDown()}
-                onMouseEnter={() => this.handleMouseEnter()}
-                onMouseUp={() => this.handleMouseUp()}
+                onMouseDown={() => this.state.onMouseDown(this.state.row, this.state.col)}
+                onMouseEnter={() => this.state.onMouseEnter(this.state.row, this.state.col)}
+                onMouseUp={() => this.state.onMouseUp()}
             />
         );
     }

@@ -8,13 +8,13 @@ body {
 }
 
 .grid {
+    position: relative;
     outline: 1px solid gray;
-    width: max-content;
     margin: 2rem auto;
 }
 
-.grid-row {
-    display: flex;
+.row {
+    width: max-content;
 }
 
 .node {
@@ -29,6 +29,10 @@ body {
 
 .node--invisible {
     background: transparent;
+}
+
+.node--furnishing {
+    position: absolute;
 }
 
 .red {
@@ -60,5 +64,5 @@ body {
 }
 
 .furnishing {
-    display: grid;
+    position: absolute;
 }
