@@ -11,18 +11,30 @@ body {
     background: whitesmoke;
 }
 
+label {
+    margin-left: 1em;
+    margin-right: 0.25em;
+}
+
+input {
+    width: 5em;
+    text-align: center;
+}
+
 .btn {
     margin: 1em;
     padding: 0.5em 1em;
 }
 
-.room-container {
-    
+.room-form {
+    margin: auto;
+    display: flex;
+    align-items: center;
 }
 
 .room {
     width: fit-content;
-    margin: 3em;
+    margin: 2em auto;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -23,13 +23,13 @@ class RoomForm extends React.Component {
     }
 
     handleSubmit(event) {
-        this.makeRoom();
+        this.makeRoom(this.state.rowsValue, this.state.colsValue);
         event.preventDefault();
     }
   
     render() {
       return (
-        <form class="room-form" onSubmit={this.handleSubmit}>
+        <form className="room-form" onSubmit={this.handleSubmit}>
             <label htmlFor="num-rows">Rows: </label>
             <input name="num-rows" id="num-rows" type="text" value={this.state.rowsValue} onChange={this.handleRowChange} />
             <label htmlFor="num-cols">Columns: </label>

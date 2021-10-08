@@ -18,6 +18,8 @@ class Room extends React.Component {
             furnishings: [],
             occupiedNodes: new Set(),
         };
+        this.key = props.id;
+        this.deleteSelf = props.delete;
     }
 
     removeFurnishing() {
@@ -141,7 +143,7 @@ class Room extends React.Component {
                 </div>
 
                 <div className="room-btns">
-                    <Button className="btn-danger">Delete</Button>
+                    <Button className="btn-danger" onClick={() => this.deleteSelf(this.key)}>Delete</Button>
                 </div>
             </div>
         );
