@@ -13,12 +13,11 @@ class Node extends React.Component {
     render() {
         const filled = (this.state.filled ? 'node--filled' : '');
         return (
-            <Col
+            <div
                 id={`node-${this.state.row}-${this.state.col}`}
                 className={`node ${filled}`}
                 onMouseDown={() => this.state.onMouseDown(this.state.row, this.state.col)}
                 onMouseEnter={() => this.state.onMouseEnter(this.state.row, this.state.col)}
-                onMouseUp={() => this.state.onMouseUp()}
             />
         );
     }

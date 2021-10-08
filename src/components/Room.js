@@ -1,4 +1,4 @@
-import { Col, Container, Row } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 import React from 'react';
 
 import Node from './Node';
@@ -80,7 +80,6 @@ class Room extends React.Component {
                 filled={this.state.furnishingUnderConstruction.has(index)}
                 onMouseDown={this.onMouseDown}
                 onMouseEnter={this.onMouseEnter}
-                onMouseUp={this.onMouseUp}
                 />
             )
         }
@@ -93,9 +92,9 @@ class Room extends React.Component {
         for(let i = 0; i < rows; i++) {
             const id = `row-${i}`;
             rowArr[i] = (
-                <Row className="grid-row" key={i} id={id}>
+                <div className="grid-row" key={i} id={id}>
                     {this.makeCols(i, cols)}
-                </Row>
+                </div>
             );
         }
         return rowArr;
@@ -106,6 +105,7 @@ class Room extends React.Component {
         const htmlFurnishings = [];
         const numColors = Room.colorOptions.length;
         let colorIndex = 0;
+        let key = 0;
         for(let furnishing of furnishings) {
             if(colorIndex > numColors) colorIndex = 0;
             htmlFurnishings.push(
@@ -114,18 +114,36 @@ class Room extends React.Component {
                 nodes={furnishing}
                 maxRows={this.state.rows}
                 maxCols={this.state.cols}
+                key={key++}
                 />
             )
             colorIndex++;
         }
+        if(colorIndex > numColors) colorIndex = 0;
+        htmlFurnishings.push(
+            <Furnishing
+            color={Room.colorOptions[colorIndex]}
+            nodes={this.state.furnishingUnderConstruction}
+            maxRows={this.state.rows}
+            maxCols={this.state.cols}
+            key={key}
+            />
+        )
+        return htmlFurnishings;
     }
 
     render() {
         return (
-            <Container className="grid" onMouseLeave={this.onMouseUp}>
-                {this.makeGrid()}
-                {this.makeFurnishings()}
-            </Container>
+            <div className="room">
+                <div className="grid" onMouseLeave={this.onMouseUp} onMouseUp={this.onMouseUp} draggable={false}>
+                    {this.makeGrid()}
+                    {this.makeFurnishings()}
+                </div>
+
+                <div className="room-btns">
+                    <Button className="btn-danger">Delete</Button>
+                </div>
+            </div>
         );
     }
 }

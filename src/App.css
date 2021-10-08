@@ -1,3 +1,7 @@
+:root {
+    --node-size: 25px;
+}
+
 html {
     font-family: 'Arial', sans-serif;
 }
@@ -7,20 +11,45 @@ body {
     background: whitesmoke;
 }
 
-.grid {
-    position: relative;
-    outline: 1px solid gray;
-    margin: 2rem auto;
+.btn {
+    margin: 1em;
+    padding: 0.5em 1em;
 }
 
-.row {
-    width: max-content;
+.room-container {
+    
+}
+
+.room {
+    width: fit-content;
+    margin: 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.grid {
+    position: relative;
+    outline: 2px solid gray;
+    margin: 2rem auto;
+    width: fit-content;
+    padding: 0;
+    margin: 0;
+}
+
+.grid-row {
+    line-height: 0;
+}
+
+.grid-row > * {
+    display: inline-block;
 }
 
 .node {
-    width: 20px;
-    height: 20px;
+    width: var(--node-size);
+    height: var(--node-size);
     border: 1px solid gray;
+    align-self: flex-start;
 }
 
 .node--filled {
@@ -56,13 +85,15 @@ body {
 }
 
 .yellow {
-    background: peru;
+    background: yellow;
 }
 
 .orange {
-    
+    background: orange;
 }
 
 .furnishing {
     position: absolute;
+    top: 0;
+    left: 0;
 }

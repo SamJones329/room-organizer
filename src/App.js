@@ -1,32 +1,56 @@
-import './App.css';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form, Navbar, Nav } from 'react-bootstrap'
 import Room from './components/Room';
+import RoomForm from './components/RoomForm'
+import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        
-      </header>
+class App extends React.Component {
 
-      <Navbar>
-        <form>
-          <label htmlFor="num-rows">Rows: </label>
-          <input name="num-rows" id="num-rows" type="text"></input>
-          <label htmlFor="num-cols">Columns: </label>
-          <input name="num-cols" id="num-cols" type="text"></input>
-          <Button type="submit">
-            New Grid
-          </Button>
-        </form>
-      </Navbar>
+  constructor(props) {
+    super(props);
+    this.state = {
+      ...props,
+      rooms: [{rows: 10, cols: 10}]
+    };
+  }
 
-      <Room rows={10} columns={10}></Room>
+  addRoom(rows, cols) {
+    const rooms = this.state.rooms;
+    rooms.push({rows: rows, cols: cols});
+    this.setState({
+      rooms: rooms
+    });
+  }
 
-    </div>
-  );
+  makeRooms() {
+    const rooms = this.state.rooms;
+    const htmlRooms = [];
+    for(let room of rooms) {
+      htmlRooms.push(
+        <Room rows={room.rows} columns={room.cols} />
+      );
+    }
+  }
+  
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          
+        </header>
+
+        <Navbar>
+          <RoomForm handleSubmit={() => {}} />
+        </Navbar>
+
+        <Container className="room-container">
+          {this.makeRooms()}
+        </Container>
+
+      </div>
+    );
+  }
 }
 
 export default App;
