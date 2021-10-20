@@ -2,10 +2,8 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form, Navbar, Nav } from 'react-bootstrap'
 import './App.css';
-import React from 'react';
 import Room from './components/Room';
 import RoomForm from './components/RoomForm'
-import './App.css';
 
 class App extends React.Component {
 

@@ -55,7 +55,6 @@ input {
 
 .grid-row > * {
     display: inline-block;
-    margin: 2rem auto;
     padding: 0;
     width: max-content;
     outline: 1px solid gray;

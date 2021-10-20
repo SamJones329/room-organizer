@@ -16,7 +16,7 @@ class Furnishing extends React.Component {
         const nodes = this.state.nodes.values();
         const gridNodes = [];
         let key = 0;
-        for(let index of nodes) {
+        for(const index of nodes) {
             const row = Math.floor(index / this.state.maxRows);
             const col = index - row * this.state.maxCols;
             const top = row * NODE_SIZE; //px

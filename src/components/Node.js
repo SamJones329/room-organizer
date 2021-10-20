@@ -9,20 +9,8 @@ class Node extends React.Component {
             ...props,
             filled: false,
         }
-    }
-
-    onMouseDown() {
-        this.state.onMouseDown(this.state.row, this.state.col);
-        this.setState({
-            filled: true,
-        })
-    }
-
-    onMouseEnter() {
-        this.state.onMouseEnter(this.state.row, this.state.col);
-        this.setState({
-            filled: true,
-        })
+        this.row = props.row;
+        this.col = props.col;
     }
 
     render() {
@@ -34,9 +22,8 @@ class Node extends React.Component {
         return (
             <div
                 className={`node ${fillclass}`}
-                onMouseDown={this.onMouseDown}
-                onMouseEnter={this.onMouseEnter}
-                onMouseUp={() => this.state.onMouseUp()}
+                onMouseDown={() => this.state.onMouseDown(this.row, this.col)}
+                onMouseEnter={() => this.state.onMouseEnter(this.row, this.col)}
             />
             
         );

@@ -20,6 +20,9 @@ class Room extends React.Component {
         };
         this.key = props.id;
         this.deleteSelf = props.delete;
+        this.onMouseDown = this.onMouseDown.bind(this);
+        this.onMouseEnter = this.onMouseEnter.bind(this);
+        this.onMouseUp = this.onMouseUp.bind(this);
     }
 
     removeFurnishing() {
@@ -37,14 +40,14 @@ class Room extends React.Component {
         });
     }
 
-    onMouseDown =  (row, col) => {
+    onMouseDown(row, col) {
         const index = row*this.state.rows + col;
         if(this.state.occupiedNodes.has(index) || this.state.mousePressed) return;
         this.setState({ mousePressed: true });
         this.addNodeToFurnishingUnderConstruction(index);
     }
 
-    onMouseEnter = (row, col) => {
+    onMouseEnter(row, col) {
         if(this.state.mousePressed) {
             const index = row * this.state.rows + col;
             if(!this.state.occupiedNodes.has(index)) {
@@ -54,7 +57,7 @@ class Room extends React.Component {
         return this.state.mousePressed;
     }
 
-    onMouseUp = () => {
+    onMouseUp() {
         const furnishingSet = this.state.furnishingUnderConstruction;
         if(furnishingSet.size === 0) {
             this.setState({ mousePressed: false });
@@ -72,7 +75,7 @@ class Room extends React.Component {
     makeCols = (row, cols) => {
         const fn = (index) => {
             const fill = this.state.furnishingUnderConstruction.has(index)
-            if(fill) console.log(index)
+            if(fill) console.log('fill ', index)
             return fill
         }
         const colArr = []
@@ -114,19 +117,20 @@ class Room extends React.Component {
         const numColors = Room.colorOptions.length;
         let colorIndex = 0;
         let key = 0;
-        for(let furnishing of furnishings) {
-            if(colorIndex > numColors) colorIndex = 0;
+        console.log(furnishings);
+        for(const furnishing of furnishings) {
+            if(colorIndex > numColors-1) colorIndex = 0;
+            console.log('color index', colorIndex, furnishing)
             htmlFurnishings.push(
                 <Furnishing 
                 key={htmlFurnishings.length}
-                color={Room.colorOptions[colorIndex]}
+                color={Room.colorOptions[colorIndex++]}
                 nodes={furnishing}
                 maxRows={this.state.rows}
                 maxCols={this.state.cols}
                 key={key++}
                 />
             )
-            colorIndex++;
         }
         if(colorIndex > numColors) colorIndex = 0;
         htmlFurnishings.push(
