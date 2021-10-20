@@ -55,6 +55,10 @@ input {
 
 .grid-row > * {
     display: inline-block;
+    margin: 2rem auto;
+    padding: 0;
+    width: max-content;
+    outline: 1px solid gray;
 }
 
 .node {
@@ -70,6 +74,12 @@ input {
 
 .node--invisible {
     background: transparent;
+}
+
+.furnishing {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .node--furnishing {

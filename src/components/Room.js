@@ -27,13 +27,13 @@ class Room extends React.Component {
     }
 
     addNodeToFurnishingUnderConstruction(index) {
-        const furnishingUnderConstruction = this.state.furnishingUnderConstruction;
-        const occupiedNodes = this.state.occupiedNodes;
-        furnishingUnderConstruction.add(index);
-        occupiedNodes.add(index);
+        const newFurnishingUnderConstruction = new Set(this.state.furnishingUnderConstruction);
+        const newOccupiedNodes = new Set(this.state.occupiedNodes);
+        newFurnishingUnderConstruction.add(index);
+        newOccupiedNodes.add(index);
         this.setState({ 
-            furnishingUnderConstruction: furnishingUnderConstruction,
-            occupiedNodes: occupiedNodes
+            furnishingUnderConstruction: newFurnishingUnderConstruction,
+            occupiedNodes: newOccupiedNodes,
         });
     }
 
@@ -70,6 +70,11 @@ class Room extends React.Component {
     }
 
     makeCols = (row, cols) => {
+        const fn = (index) => {
+            const fill = this.state.furnishingUnderConstruction.has(index)
+            if(fill) console.log(index)
+            return fill
+        }
         const colArr = []
         for(let i = 0; i < cols; i++) {
             const id = `node-${row}-${i}`;
@@ -79,7 +84,7 @@ class Room extends React.Component {
                 key={index}
                 row={row} 
                 col={i}
-                filled={this.state.furnishingUnderConstruction.has(index)}
+                filled={fn(index)}//this.state.furnishingUnderConstruction.has(index)}
                 onMouseDown={this.onMouseDown}
                 onMouseEnter={this.onMouseEnter}
                 />
@@ -89,6 +94,7 @@ class Room extends React.Component {
     }
 
     makeGrid = () => {
+        console.log(this.state.furnishingUnderConstruction.values(), this.state.furnishings)
         const rows = this.state.rows, cols = this.state.cols;
         const rowArr = []
         for(let i = 0; i < rows; i++) {
@@ -112,6 +118,7 @@ class Room extends React.Component {
             if(colorIndex > numColors) colorIndex = 0;
             htmlFurnishings.push(
                 <Furnishing 
+                key={htmlFurnishings.length}
                 color={Room.colorOptions[colorIndex]}
                 nodes={furnishing}
                 maxRows={this.state.rows}
