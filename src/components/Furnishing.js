@@ -28,12 +28,21 @@ class Furnishing extends React.Component {
                     top: `${top}px`,
                     left: `${left}px`
                 }}
+                onMouseEnter={this.props.onMouseEnter}
                 key={key++}
                 />
             );
             gridNodes.push(newNode);
         }
         return gridNodes;
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps !== this.props) {
+            this.setState({
+                ...this.props
+            })
+        }
     }
 
     render() {
