@@ -51,6 +51,7 @@ input {
 
 .grid-row {
     line-height: 0;
+    display: flex;
 }
 
 .grid-row > * {

@@ -5,8 +5,8 @@ class RoomForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            rowsValue: 0,
-            colsValue: 0
+            rowsValue: 10,
+            colsValue: 10
         };
         this.handleRowChange = this.handleRowChange.bind(this);
         this.handleColChange = this.handleColChange.bind(this);
