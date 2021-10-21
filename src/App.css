@@ -11,6 +11,15 @@ body {
     background: whitesmoke;
 }
 
+header {
+    width: max-content;
+    margin: auto;
+}
+
+h1 {
+    width: max-content;
+}
+
 label {
     margin-left: 1em;
     margin-right: 0.25em;
