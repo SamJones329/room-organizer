@@ -1,4 +1,4 @@
-# This is a Node.js and React project
+# Room Organizer
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
